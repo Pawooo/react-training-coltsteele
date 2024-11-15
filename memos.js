@@ -93,3 +93,71 @@ shoppingCart.map((item => {
         return item;
     }
 }))
+
+function increaseScore(id) {
+    // When map runs on oldp, it does create a new array, but without using setParticipants(updatedArray), React doesn’t know that participants was updated. This is because React relies on setParticipants to detect state changes and trigger re-renders.
+    // const oldp = participants;
+    // oldp.map(i => {
+    //     if(i.id === id) {
+    //         return {...i, score: i.score + 1};
+    //     } else {
+    //         return i;
+    //     }
+    // })
+    // console.log(oldp);
+    // setParticipants(oldp);
+    setParticipants(oldp => oldp.map(i => {
+        if (i.id === id) {
+            return {...i, score: i.score + 1};
+            // i.id === id ? { ...i, score: i.score + 1 } : i
+        } else {
+            return i;
+        }
+    }))
+ }
+
+//  Multiple Fields Signup Form basic pattern
+const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: ""
+});
+
+function handleChange(evt) {
+    const fieldName = evt.target.name;
+    const value = evt.target.value;
+
+    setFormData(currData => {
+        currData[fieldName] = value;
+        return {...currData};
+    })
+}
+
+// Alternative syntax
+const handleChange = (e) => {
+    setFormData(currData => {
+        return {
+            ...currData;
+            [e.target.name]: e.target.value,
+        };
+    });
+  };
+
+
+// INPUT DATA OnChange handler function structure
+onChange={e => handleChange(e)} (Arrow Function Wrapper)
+
+// This version wraps the handleChange function call inside an arrow function. Here’s what it does:
+
+// Every time the onChange event triggers, a new arrow function is created, and handleChange is called with the event as an argument.
+// This is generally equivalent to onChange={handleChange}, but creating a new function on each render can have minor performance implications if there are many such inputs.
+
+// This structure is sometimes useful if you want to add extra functionality, or if the function needs arguments besides the event object, as in:
+
+onChange={e => handleChange(e, someOtherArgument)}
+
+onChange={handleChange} (Direct Reference)
+
+// This version directly passes the handleChange function to onChange, which is cleaner and more concise.
+
+// onChange automatically passes the event object to handleChange as its first argument, so there's no need for an arrow function.
+// It's slightly more efficient since it doesn’t create a new function each time the component renders.
