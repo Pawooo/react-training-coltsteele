@@ -161,3 +161,17 @@ onChange={handleChange} (Direct Reference)
 
 // onChange automatically passes the event object to handleChange as its first argument, so there's no need for an arrow function.
 // It's slightly more efficient since it doesn’t create a new function each time the component renders.
+
+return {...currData, [e.target.name]: e.target.value}
+// This syntax is called Computed Property Names in JavaScript. It is part of the ES6 (ECMAScript 2015) specification and allows you to dynamically set or define object property keys based on an expression.
+// How It Works:
+
+//     The expression inside the square brackets ([e.target.name]) is evaluated, and the result is used as the property name for the object.
+//     In the example [e.target.name]: e.target.value, the value of e.target.name (a dynamic key) determines the property name, and e.target.value becomes the value assigned to that property.
+
+// Use Case:
+
+// It is commonly used when:
+
+//     You want to dynamically update object properties.
+//     You have variable keys for properties in an object.
