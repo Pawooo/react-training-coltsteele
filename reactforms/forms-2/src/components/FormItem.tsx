@@ -1,10 +1,10 @@
 import React from 'react'
 
-const FormItem = ({ label, onChange }) => {
+const FormItem = ({ label, onChange, value, type }) => {
   return (
     <div className='flex'>
       <label htmlFor={label}>{label}</label>
-      <input type="text" placeholder="product name" name={label} id={label} onChange={onChange} />
+      <input type={type} value={value} placeholder="product name" name={label} id={label} onChange={onChange} />
     </div>
   )
 }

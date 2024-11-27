@@ -14,18 +14,10 @@ const ShoppingListForm = () => {
     })
   }
 
-  // const addToCart = () => {
-  //   else.preventDefault();
-
-  //   setFormData(currData => {
-  //     return {...currData, }
-  //   })
-  // }
-
   const handleSubmit = (e) => {
-    console.log("fired");
     e.preventDefault();
     setItems(i => [...i, formData]);
+    setFormData( {product: "", quantity: ""} );
   }
 
   return (
@@ -33,8 +25,8 @@ const ShoppingListForm = () => {
       <header><h1>Form</h1></header>
       <main>
       <form action="submit" onSubmit={handleSubmit}>
-        <FormItem label="product" onChange={handleChange} ></FormItem>
-        <FormItem label="quantity" onChange={handleChange} ></FormItem>
+        <FormItem label="product" type="text" value={formData.product} onChange={handleChange} ></FormItem>
+        <FormItem label="quantity" type="number" value={formData.quantity} onChange={handleChange} ></FormItem>
         <button>Submit</button>
       </form>
       <ShoppingList items={items} />
