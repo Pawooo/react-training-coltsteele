@@ -175,3 +175,32 @@ return {...currData, [e.target.name]: e.target.value}
 
 //     You want to dynamically update object properties.
 //     You have variable keys for properties in an object.
+
+2 ways to handle functions passed from parent:
+
+{dataTemp.map((item) => {
+    return(<ToDoItem key={item.id} item={item} deleteItem={deleteItem} toggleItem={() => toggleItem(item.id)} />);
+    })
+}
+
+1. deleteItem={deleteItem} 1 parent function 1 child function, trigger child function 
+const deleteItem = (key) => {
+    // console.log(dataTemp);
+    setDataTemp((oldData) => oldData.filter(i => i.id !== key));
+} 
+
+const ToDoItem = ( { item, deleteItem, toggleItem } ) => {
+    const { id, text, completed } = item;
+  
+    function runDeleteItem() {
+      deleteItem(id);
+    }
+
+2. passing a callback
+
+toggleItem={() => toggleItem(item.id)}
+
+<ListItemButton role={undefined} dense onClick={toggleItem}></ListItemButton>
+const ToDoItem = ( { item, deleteItem, toggleItem } ) => {
+
+DO NOT PASS KEY AS A SEPARATE PROP AND DO NOT USE IT IN YOUR CODE — IT'S HANDLED BY REACT BEHIND THE SCENES
